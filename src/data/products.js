@@ -17,7 +17,7 @@ const DUMMY_PRODUCTS = [
         gender: 'male',
         price: 250, //in USD
         discount: 50, // in percentage
-        thumbnail: [
+        thumbnails: [
             {
                 thumbnailId: 'p1Th1',
                 imageId: 'p1Image1',

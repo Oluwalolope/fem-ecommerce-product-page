@@ -5,7 +5,7 @@ import minusIcon from "../assets/icon-minus.svg";
 // import { CartContext } from "../store/shopping-cart-context.jsx";
 import ProductGallery from './ProductGallery.jsx';
 
-const Product = ({ id, image, name, brand, price, discount, description }) => {
+const Product = ({ id, image, thumbnails, name, brand, price, discount, description }) => {
 //   const { addItemToCart } = useContext(CartContext);
     let discountPrice;
     if (discount) {
@@ -14,7 +14,7 @@ const Product = ({ id, image, name, brand, price, discount, description }) => {
 
   return (
     <article className="product">
-      <ProductGallery image={image[0].imageSrc} name={name} />
+      <ProductGallery image={image[0].imageSrc} name={name} thumbnails={thumbnails}/>
       <div className="product-content">
         <div>
           <p className="brand">{brand}</p>
@@ -23,11 +23,9 @@ const Product = ({ id, image, name, brand, price, discount, description }) => {
           <div className="price-wrapper">
             <p className="product-price">
               ${discount ? discountPrice.toFixed(2) : price.toFixed(2)}
-              <span className="discount">{discount}%</span>
+              {discount && <span className="discount">{discount}%</span>}
             </p>
-            <p className="undiscounted-price">
-              ${discount ? price.toFixed(2) : ''}
-            </p>
+            {discount && <p className="undiscounted-price">${price.toFixed(2)}</p>}
           </div>
         </div>
         <div className="product-actions">

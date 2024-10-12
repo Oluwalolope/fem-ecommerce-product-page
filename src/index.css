@@ -73,8 +73,9 @@ header {
   gap: var(--spacing-700);
   margin-top: var(--spacing-400);
   padding-block-end:  var(--spacing-600);
-  margin-inline: var(--spacing-700);
+  margin-inline: auto;
   border-bottom: 1px solid var(--clr-neutral-300);
+  width: min(100% - 2rem, 1100px);
 }
 
 /* Navigation Start */
@@ -215,10 +216,25 @@ button {
   /* Navigation End */
 
 /* Product Section */
-.image-slider {
-  position: relative;
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: var(--spacing-600);
   width: 100%;
-  height: 20%;
+  margin-inline: auto;
+}
+
+.image-slider {
+  width: 100%;
+  height: 100%;
+  grid-area: 1 / 1 / 2 / -1;
+}
+.image-grid {
+  position: relative;
+}
+.thumbnail-grid {
+  display: none;
 }
 .slider-controls {
   position: absolute;
@@ -240,10 +256,10 @@ button {
 .product-image {
   object-fit: cover;
   width: 100%;
-  height: 20%;
 }
 .product-content {
   padding-inline: var(--spacing-400);
+  grid-area: 2 / 1 / 3 / -1;
 }
 .brand {
   color: var(--clr-primary-400);
@@ -329,4 +345,58 @@ h1 {
 .add-to-cart:hover,
 .add-to-cart:focus {
   background-color: var(--clr-primary-200);
+}
+
+@media (min-width: 50em) {
+  .product {
+    margin-top: var(--spacing-700);
+    height: min(80vh, 500px);
+    max-width: 1000px;
+  }
+ .image-slider {
+    grid-area: 1 / 1 / -1 / 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: var(--spacing-300);
+    grid-template-rows: 75% 25%;
+  }
+  .image-grid {
+    grid-area: 1 / 1 / 2 / -1 ;
+  }
+  .slider-controls {
+    display: none;
+  }
+  .product-image {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--br);
+  }
+  .thumbnail-grid {
+    display: flex;
+    gap: var(--spacing-200);
+    justify-content: space-between;
+    align-items: flex-end;
+    grid-area: 2 / 1 / 3 / -1 ;
+  }
+  .thumbnail {
+    width: 20%;
+  }
+  .thumbnail img {
+    object-fit: contain;
+    width: 100%;
+    border-radius: var(--br);
+  }
+ .product-content {
+    grid-area: 1 / 2 / -1 / 3;
+    align-self: center;
+  } 
+ .price-wrapper {
+    flex-direction: column;
+    gap: var(--spacing-200);
+  }
+ .product-actions {
+    grid-template-columns: 1fr 2fr;
+  }
 }
