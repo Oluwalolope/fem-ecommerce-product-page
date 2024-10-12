@@ -8,7 +8,7 @@ import productOneImageTwo from "../assets/image-product-2.jpg";
 import productOneImageThree from "../assets/image-product-3.jpg";
 import productOneImageFour from "../assets/image-product-4.jpg";
 
-const PRODUCTS = [
+const DUMMY_PRODUCTS = [
     {
         id: 'p1',
         brand: 'Sneaker Company',
@@ -60,4 +60,4 @@ const PRODUCTS = [
     }
 ];
 
-export default PRODUCTS;
+export default DUMMY_PRODUCTS;
