@@ -39,7 +39,7 @@ const DUMMY_PRODUCTS = [
                 thumbnailSrc: productOneThumbnailFour
             }
         ],
-        image: [
+        images: [
             {
                 imageId: 'p1Image1',
                 imageSrc: productOneImageOne

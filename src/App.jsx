@@ -4,14 +4,13 @@ import DUMMY_PRODUCTS from "./data/products.js";
 import './index.css'
 
 const App = () => {
-  const [ product ] = DUMMY_PRODUCTS;
   return (
     <>
       <header>
         <NavBar />
       </header>
       <main>
-        <Product {...product} />
+        <Product {...DUMMY_PRODUCTS[0]} />
       </main>
     </>
   )
