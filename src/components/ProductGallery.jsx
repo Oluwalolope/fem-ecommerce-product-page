@@ -1,9 +1,8 @@
 import { useState } from "react";
 import DUMMY_PRODUCTS from '../data/products.js';
-import nextIcon from "../assets/icon-next.svg";
-import previousIcon from "../assets/icon-previous.svg";
+import SliderControls from "./SliderControls.jsx";
 
-const ProductGallery = ({ images, name, thumbnails }) => {
+const ProductGallery = ({ images, name, thumbnails, handleModalOpen }) => {
     const [ activelyDisplayedProductImageId, setActivelyDisplayedProductImageId ] = useState('p1Image1');
 
     const handleActivelyDisplayedProductImageId = (id) => {
@@ -15,15 +14,10 @@ const ProductGallery = ({ images, name, thumbnails }) => {
     return (
       <div className="image-slider" id="image-slider">
         <div className="image-grid">
-          <img src={images[activeImageIndex].imageSrc} alt={name} className="product-image" draggable="false"/>
-          <div className="slider-controls" aria-controls="image-slider">
-              <button>
-                <img src={previousIcon} alt="" draggable="false"/>
-              </button>
-              <button>
-                <img src={nextIcon} alt="" draggable="false"/>
-              </button>
-          </div>
+          <button onClick={handleModalOpen} className="modal-btn">
+            <img src={images[activeImageIndex].imageSrc} alt={name} className="product-image" draggable="false"/>
+          </button>
+          <SliderControls />
         </div>
 
           <menu className="thumbnail-grid">

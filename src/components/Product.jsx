@@ -1,20 +1,40 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import cartIcon from "../assets/icon-cart.svg";
 import plusIcon from "../assets/icon-plus.svg";
 import minusIcon from "../assets/icon-minus.svg";
+import closeIcon from "../assets/icon-close.svg";
 // import { CartContext } from "../store/shopping-cart-context.jsx";
 import ProductGallery from './ProductGallery.jsx';
+import Modal from './Modal.jsx';
 
 const Product = ({ id, images, thumbnails, name, brand, price, discount, description }) => {
 //   const { addItemToCart } = useContext(CartContext);
-    let discountPrice;
-    if (discount) {
-        discountPrice = price - (price * (discount / 100));
-    }
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  let discountPrice;
+  if (discount) {
+    discountPrice = price - (price * (discount / 100));
+  };
+
+  const handleModalOpen = () => {
+    setModalIsOpen(true);
+  };
+  
+  const handleModalClose = () => {
+    setModalIsOpen(false);
+  };
+
 
   return (
     <article className="product">
-      <ProductGallery images={images} name={name} thumbnails={thumbnails}/>
+      <Modal open={modalIsOpen} onClose={handleModalClose}>
+        <button className="close-modal-btn" onClick={handleModalClose} >
+          <img src={closeIcon} alt="" />
+        </button>
+        <ProductGallery images={images} name={name} thumbnails={thumbnails}/>
+      </Modal>
+
+      <ProductGallery images={images} name={name} thumbnails={thumbnails} handleModalOpen={handleModalOpen}/>
       <div className="product-content">
         <div>
           <p className="brand">{brand}</p>
