@@ -11,13 +11,42 @@ const ProductGallery = ({ images, name, thumbnails, handleModalOpen }) => {
 
     const activeImageIndex = DUMMY_PRODUCTS[0].images.findIndex(product => product.imageId === activelyDisplayedProductImageId);
 
+    const handleImageSlider = ( action ) => {
+      const imageLength = DUMMY_PRODUCTS[0].images.length;
+      let activeImageId;
+      let currentIndex = activeImageIndex;
+
+      if (action === "next") {
+        currentIndex++;
+
+        if (currentIndex === imageLength) {
+          currentIndex = 0;
+        }
+
+        activeImageId = DUMMY_PRODUCTS[0].images[currentIndex].imageId;
+      };
+      
+      if (action === "previous") {
+        currentIndex--;
+  
+        if (currentIndex < 0) {
+          currentIndex = imageLength - 1;
+        }
+  
+        activeImageId = DUMMY_PRODUCTS[0].images[currentIndex].imageId;
+    
+      }
+
+      setActivelyDisplayedProductImageId(activeImageId);
+    }
+
     return (
       <div className="image-slider" id="image-slider">
         <div className="image-grid">
           <button onClick={handleModalOpen} className="modal-btn">
             <img src={images[activeImageIndex].imageSrc} alt={name} className="product-image" draggable="false"/>
           </button>
-          <SliderControls />
+          <SliderControls sliderAction={handleImageSlider}/>
         </div>
 
           <menu className="thumbnail-grid">

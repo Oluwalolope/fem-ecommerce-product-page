@@ -72,7 +72,7 @@ header {
   align-items: center;
   gap: var(--spacing-700);
   margin-top: var(--spacing-400);
-  padding-block-end:  var(--spacing-600);
+  padding-block-end: var(--spacing-600);
   margin-inline: auto;
   border-bottom: 1px solid var(--clr-neutral-300);
   width: min(100% - 2rem, 1100px);
@@ -102,7 +102,6 @@ menu {
   place-items: center;
   gap: var(--spacing-200);
 }
-
 
 @media (max-width: 50em) {
   header {
@@ -141,7 +140,7 @@ menu {
   html:has(nav.opened) {
     overflow: hidden;
   }
-  
+
   .primary-navigation ul {
     flex-direction: column;
     gap: var(--spacing-600);
@@ -164,7 +163,6 @@ menu {
     align-items: center;
   }
 }
-
 
 a {
   text-decoration: none;
@@ -214,7 +212,7 @@ button {
   white-space: nowrap;
   border: 0;
 }
-  /* Navigation End */
+/* Navigation End */
 
 /* Product Section */
 .product {
@@ -357,16 +355,16 @@ h1 {
     max-width: 1000px;
     margin-inline: auto;
   }
- .image-slider {
+  .image-slider {
     grid-area: 1 / 1 / -1 / 2;
-    
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: var(--spacing-300);
     grid-template-rows: 75% 1fr;
   }
   .image-grid {
-    grid-area: 1 / 1 / 2 / -1 ;
+    grid-area: 1 / 1 / 2 / -1;
   }
   .slider-controls {
     display: none;
@@ -382,7 +380,7 @@ h1 {
     gap: var(--spacing-200);
     justify-content: space-between;
     align-items: flex-start;
-    grid-area: 2 / 1 / 3 / -1 ;
+    grid-area: 2 / 1 / 3 / -1;
   }
   .thumbnail {
     width: 20%;
@@ -403,15 +401,15 @@ h1 {
     opacity: 0.8;
     border: 2px solid var(--clr-primary-400);
   }
- .product-content {
+  .product-content {
     grid-area: 1 / 2 / -1 / 3;
     align-self: center;
-  } 
- .price-wrapper {
+  }
+  .price-wrapper {
     flex-direction: column;
     gap: var(--spacing-200);
   }
- .product-actions {
+  .product-actions {
     grid-template-columns: 1fr 2fr;
   }
 }
@@ -434,6 +432,11 @@ h1 {
   background: var(--clr-neutral-800);
 }
 
+.modal:has(.image-slider) {
+  width: 0;
+  height: 0;
+}
+
 .modal {
   width: 100%;
   height: 100vh;
@@ -444,6 +447,7 @@ h1 {
   display: grid;
   place-items: center;
 }
+
 .modal .image-slider {
   width: min(100%, 500px);
   height: 80%;
@@ -462,4 +466,9 @@ h1 {
 }
 .modal .thumbnail:is(:hover, :focus) {
   opacity: 1;
+}
+.modal .slider-controls {
+  display: flex;
+  width: 120%;
+  padding-inline: 0;
 }
