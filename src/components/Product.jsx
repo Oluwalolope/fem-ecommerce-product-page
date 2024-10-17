@@ -7,6 +7,8 @@ import closeIcon from "../assets/icon-close.svg";
 import ProductGallery from './ProductGallery.jsx';
 import Modal from './Modal.jsx';
 
+const isDesktop = innerWidth >= 800; 
+
 const Product = ({ id, images, thumbnails, name, brand, price, discount, description }) => {
 //   const { addItemToCart } = useContext(CartContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -27,14 +29,14 @@ const Product = ({ id, images, thumbnails, name, brand, price, discount, descrip
 
   return (
     <article className="product">
-      <Modal open={modalIsOpen} onClose={handleModalClose}>
+      {(modalIsOpen && isDesktop) && <Modal open={modalIsOpen} onClose={handleModalClose}>
         <button className="close-modal-btn" onClick={handleModalClose} >
           <img src={closeIcon} alt="" />
         </button>
         <ProductGallery images={images} name={name} thumbnails={thumbnails}/>
-      </Modal>
+      </Modal>}
 
-      <ProductGallery images={images} name={name} thumbnails={thumbnails} handleModalOpen={handleModalOpen}/>
+      <ProductGallery images={images} name={name} thumbnails={thumbnails} handleModalOpen={handleModalOpen} isDesktop={isDesktop}/>
       <div className="product-content">
         <div>
           <p className="brand">{brand}</p>

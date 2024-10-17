@@ -2,7 +2,7 @@ import { useState } from "react";
 import DUMMY_PRODUCTS from '../data/products.js';
 import SliderControls from "./SliderControls.jsx";
 
-const ProductGallery = ({ images, name, thumbnails, handleModalOpen }) => {
+const ProductGallery = ({ images, name, thumbnails, handleModalOpen, isDesktop }) => {
     const [ activelyDisplayedProductImageId, setActivelyDisplayedProductImageId ] = useState('p1Image1');
 
     const handleActivelyDisplayedProductImageId = (id) => {
@@ -43,7 +43,7 @@ const ProductGallery = ({ images, name, thumbnails, handleModalOpen }) => {
     return (
       <div className="image-slider" id="image-slider">
         <div className="image-grid">
-          <button onClick={handleModalOpen} className="modal-btn">
+          <button onClick={handleModalOpen} disabled={!isDesktop} className="modal-btn">
             <img src={images[activeImageIndex].imageSrc} alt={name} className="product-image" draggable="false"/>
           </button>
           <SliderControls sliderAction={handleImageSlider}/>
