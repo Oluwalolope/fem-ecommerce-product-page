@@ -1,21 +1,23 @@
-import cartIcon from "../assets/icon-cart.svg";
 import CartItem from "./CartItem";
 
-const Cart = () => {
+const Cart = ({ items, onDeleteCartItem }) => {
     return (
-        <>
-            <button class="cart-btn">
-                <img src={cartIcon} alt="A Shopping Cart" />
-            </button>
-
-            <div className="cart">
-                <h4>Cart</h4>
-                <ul className="cart-items">
-                    <CartItem id="p1" quantity={3} />
-                </ul>
-                <button className="add-to-cart">Checkout</button>
-            </div>
-        </>
+      <div className="cart">
+        <h4>Cart</h4>
+        {items.length !== 0 ?
+            <>
+              <ul className="cart-items">
+                {items.map((item) => (
+                  <CartItem key={item.id} id={item.id} quantity={item.quantity} onDelete={onDeleteCartItem}/>
+                ))}
+              </ul> 
+              
+              <button className="add-to-cart">Checkout</button>
+            </>
+            :
+            <p>Your cart is empty</p>
+        }
+      </div>
     );
 }
  

@@ -2,10 +2,10 @@ import { useRef } from 'react';
 import menuOpen from '../assets/icon-menu.svg';
 import menuClose from '../assets/icon-close.svg';
 import logo from '../assets/logo.svg';
-import Cart from './Cart';
 import Avatar from './Avatar';
+import CartButton from './CartButton';
 
-const NavBar = () => {
+const NavBar = ({ onCartClick }) => {
   const navRef = useRef();
 
   const handleShowNavbar = () => {
@@ -66,7 +66,7 @@ const NavBar = () => {
         </nav>
 
         <menu>
-          <Cart />
+          <CartButton onClick={onCartClick}/>
           <Avatar />
         </menu>
       </div>

@@ -1,16 +1,14 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import cartIcon from "../assets/icon-cart.svg";
 import plusIcon from "../assets/icon-plus.svg";
 import minusIcon from "../assets/icon-minus.svg";
 import closeIcon from "../assets/icon-close.svg";
-// import { CartContext } from "../store/shopping-cart-context.jsx";
 import ProductGallery from './ProductGallery.jsx';
 import Modal from './Modal.jsx';
 
 const isDesktop = innerWidth >= 800; 
 
-const Product = ({ id, images, thumbnails, name, brand, price, discount, description }) => {
-//   const { addItemToCart } = useContext(CartContext);
+const Product = ({ id, images, thumbnails, name, brand, price, discount, description, items, updateItemQuantity, addItemToCart }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   let discountPrice;
@@ -26,6 +24,7 @@ const Product = ({ id, images, thumbnails, name, brand, price, discount, descrip
     setModalIsOpen(false);
   };
 
+  const cartItem = items.find(item => item.id === id) || {};
 
   return (
     <article className="product">
@@ -52,11 +51,11 @@ const Product = ({ id, images, thumbnails, name, brand, price, discount, descrip
         </div>
         <div className="product-actions">
           <div className="cart-item-actions">
-            <button onClick={() => updateItemQuantity(item.id, -1)}>
+            <button onClick={() => updateItemQuantity(id, -1)}>
               <img src={minusIcon} alt="" />
             </button>
-            <span>0</span>
-            <button onClick={() => updateItemQuantity(item.id, 1)}>
+            <span>{cartItem.quantity ? cartItem.quantity : "0"}</span>
+            <button onClick={() => updateItemQuantity(id, 1)}>
               <img src={plusIcon} alt="" />
             </button>
           </div>
@@ -72,43 +71,3 @@ const Product = ({ id, images, thumbnails, name, brand, price, discount, descrip
 };
 
 export default Product;
-
-
-// import { useContext } from "react";
-// import { CartContext } from "../store/shopping-cart-context.jsx";
-
-// export default function Cart() {
-//   const { items, updateItemQuantity } = useContext(CartContext);
-
-//   const totalPrice = items.reduce(
-//     (acc, item) => acc + item.price * item.quantity,
-//     0
-//   );
-//   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
-
-//   return (
-//     <div id="cart">
-//       {items.length === 0 && <p>No items in cart!</p>}
-//       {items.length > 0 && (
-//         <ul id="cart-items">
-//           {items.map((item) => {
-//             const formattedPrice = `$${item.price.toFixed(2)}`;
-
-//             return (
-//               <li key={item.id}>
-//                 <div>
-//                   <span>{item.name}</span>
-//                   <span> ({formattedPrice})</span>
-//                 </div>
-//                 
-//               </li>
-//             );
-//           })}
-//         </ul>
-//       )}
-//       <p id="cart-total-price">
-//         Cart Total: <strong>{formattedTotalPrice}</strong>
-//       </p>
-//     </div>
-//   );
-// }

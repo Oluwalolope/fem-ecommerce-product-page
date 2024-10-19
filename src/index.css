@@ -178,6 +178,7 @@ ul {
 }
 
 button {
+  cursor: pointer;
   background-color: transparent;
   outline-color: transparent;
   padding: var(--spacing-100);
@@ -231,16 +232,19 @@ button {
 /* Modal End */
 
 /* Cart  */
+main {
+  position: relative;
+}
 .cart {
   position: absolute;
   z-index: 1;
   background-color: var(--clr-neutral-100);
   border-radius: var(--br);
-  min-height: 200px;
-  width: min(100% - (var(--spacing-400) * 2), 400px);
-  top: 100px;
-  right: var(--spacing-400);
-  box-shadow: 1px 1px 5px hsl(0, 0, 0, 0.5);
+  min-height: 12.5rem;
+  width: min(100% - (var(--spacing-400) * 2), 22rem);
+  top: var(--spacing-300);
+  right: var(--spacing-300);
+  box-shadow: 1px 1px 5px var(--clr-neutral-800);
   padding: var(--spacing-200);
 }
 .cart h4 {
@@ -249,9 +253,47 @@ button {
   padding-bottom: var(--spacing-200);
   border-bottom: 1px solid var(--clr-neutral-400);
 }
+.cart-items {
+  display: block;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--spacing-300);
+}
+.cart-item-thumbnail {
+  float: left;
+  object-fit: contain;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-right: var(--spacing-300);
+  border-radius: var(--br);
+}
+.cart-item-title {
+  display: inline-block;
+  color: var(--clr-neutral-400);
+  padding-bottom: var(--spacing-100);
+  font-size: var(--fs-400);
+}
+.cart-item-price {
+  display: inline-block;
+  color: var(--clr-neutral-400);
+  font-size: var(--fs-400);
+}
+.cart-item-price span {
+  color: var(--clr-neutral-900);
+  font-weight: var(--fw-bold);
+}
+.cart-delete-btn {
+  cursor: pointer;
+}
+.cart .add-to-cart {
+  margin-top: var(--spacing-300);
+}
 @media (min-width: 50em) {
   .cart {
-    right: var(--spacing-700);
+    right: 0;
   }
 }
 /* Cart End */
@@ -292,6 +334,7 @@ button {
   text-align: center;
   height: 3rem;
   width: 3rem;
+  cursor: pointer;
 }
 
 .product-image {
