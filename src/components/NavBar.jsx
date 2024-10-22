@@ -5,7 +5,7 @@ import logo from '../assets/logo.svg';
 import Avatar from './Avatar';
 import CartButton from './CartButton';
 
-const NavBar = ({ onCartClick }) => {
+const NavBar = ({ onCartClick, items }) => {
   const navRef = useRef();
 
   const handleShowNavbar = () => {
@@ -66,7 +66,7 @@ const NavBar = ({ onCartClick }) => {
         </nav>
 
         <menu>
-          <CartButton onClick={onCartClick}/>
+          <CartButton onClick={onCartClick} items={items}/>
           <Avatar />
         </menu>
       </div>

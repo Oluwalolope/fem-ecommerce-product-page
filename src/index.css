@@ -103,6 +103,26 @@ menu {
   gap: var(--spacing-200);
 }
 
+.cart-btn {
+  position: relative;
+}
+.cart-quantity {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  padding: 2px 5px;
+  color: var(--clr-neutral-100);
+  font-weight: var(--fw-bold);
+  background-color: var(--clr-primary-400);
+  border-radius: 50%;
+}
+.primary-navigation ul a:is(:hover, :focus) {
+  color: var(--clr-neutral-900);
+  padding-bottom: var(--spacing-700);
+  border-bottom: 3px solid var(--clr-primary-400);
+}
+
 @media (max-width: 50em) {
   header {
     gap: 0;
@@ -232,8 +252,9 @@ button {
 /* Modal End */
 
 /* Cart  */
-main {
+.container {
   position: relative;
+  width: fit-content;
 }
 .cart {
   position: absolute;
@@ -241,8 +262,8 @@ main {
   background-color: var(--clr-neutral-100);
   border-radius: var(--br);
   min-height: 12.5rem;
-  width: min(100% - (var(--spacing-400) * 2), 22rem);
-  top: var(--spacing-300);
+  width: min(100% - (var(--spacing-400) * 2), 375px);
+  top: var(--spacing-100);
   right: var(--spacing-300);
   box-shadow: 1px 1px 5px var(--clr-neutral-800);
   padding: var(--spacing-200);
@@ -261,6 +282,12 @@ main {
   justify-content: space-between;
   align-items: center;
   padding-block: var(--spacing-300);
+}
+.cart-empty {
+  text-align: center;
+  padding-top: 50px;
+  color: var(--clr-neutral-300);
+  font-size: var(--fs-600);
 }
 .cart-item-thumbnail {
   float: left;
@@ -410,6 +437,9 @@ h1 {
 .cart-item-actions button {
   cursor: pointer;
 }
+.cart-item-actions button:hover img {
+  opacity: 0.6;
+}
 .add-to-cart {
   display: grid;
   justify-content: center;
@@ -432,14 +462,16 @@ h1 {
 }
 
 @media (min-width: 50em) {
-  main {
-    padding-inline: var(--spacing-400);
+  .container {
+    margin-inline: auto;
+  }
+  .cart {
+    top: calc(var(--spacing-700) * -1.2);
   }
   .product {
     margin-top: var(--spacing-700);
     height: min(80vh, 500px);
     max-width: 1000px;
-    margin-inline: auto;
   }
   .image-slider {
     grid-area: 1 / 1 / -1 / 2;
@@ -557,6 +589,6 @@ h1 {
   .close-modal-btn {
   position: absolute;
   top: 1rem;
-  right: 23vw;
+  right: 30vw;
   }
 }

@@ -5,11 +5,13 @@ import DUMMY_PRODUCTS from "./data/products.js";
 import './index.css'
 import { useState } from "react";
 
+const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
 const App = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(storedCartItems);
   const [isCartOpen, setIsCartOPen] = useState(false);
 
-  const handleAddItemToCart = (id) => {
+  const handleAddItemToCart = (id, quantity) => {
     setItems(prevItems => {
       const updatedItems = [...prevItems];
       const existingCartItemIndex = updatedItems.findIndex(cartItem => cartItem.id === id);
@@ -17,16 +19,17 @@ const App = () => {
   
       if (existingCartItem) {
         const updatedItem = {
-          ...existingCartItem,
-          quantity: existingCartItem.quantity + 1,
+          ...existingCartItem
         };
         updatedItems[existingCartItemIndex] = updatedItem;
       } else {
         updatedItems.push({
           id: id,
-          quantity: 1
+          quantity: quantity
         });
       } 
+
+      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
       return updatedItems;
     });
   }
@@ -47,6 +50,7 @@ const App = () => {
        updatedItems[updatedItemIndex] = updatedItem;
       } 
       
+      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
       return updatedItems;
     }); 
   }
@@ -59,6 +63,7 @@ const App = () => {
 
       cartItems.splice(index, 1);
 
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return cartItems;
     });
   }
@@ -69,18 +74,20 @@ const App = () => {
   return (
     <>
       <header>
-        <NavBar onCartClick={handleCartClick} />
+        <NavBar onCartClick={handleCartClick} items={items} />
       </header>
       <main>
-        {isCartOpen && (
-          <Cart items={items} onDeleteCartItem={handleDeleteCartItem} />
-        )}
-        <Product
-          {...DUMMY_PRODUCTS[0]}
-          items={items}
-          updateItemQuantity={handleUpdateCartItemQuantity}
-          addItemToCart={handleAddItemToCart}
-        />
+        <div className="container">
+          {isCartOpen && (
+            <Cart items={items} onDeleteCartItem={handleDeleteCartItem} />
+          )}
+          <Product
+            {...DUMMY_PRODUCTS[0]}
+            items={items}
+            updateItemQuantity={handleUpdateCartItemQuantity}
+            addItemToCart={handleAddItemToCart}
+          />
+        </div>
       </main>
     </>
   );

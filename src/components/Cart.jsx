@@ -15,7 +15,7 @@ const Cart = ({ items, onDeleteCartItem }) => {
               <button className="add-to-cart">Checkout</button>
             </>
             :
-            <p>Your cart is empty</p>
+            <p className="cart-empty">Your cart is empty</p>
         }
       </div>
     );

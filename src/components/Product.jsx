@@ -9,7 +9,10 @@ import Modal from './Modal.jsx';
 const isDesktop = innerWidth >= 800; 
 
 const Product = ({ id, images, thumbnails, name, brand, price, discount, description, items, updateItemQuantity, addItemToCart }) => {
+  const cartItem = items.find(item => item.id === id) || {};
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [cartItemQuantity, setCartItemQuantity] = useState(cartItem.quantity || 0);
 
   let discountPrice;
   if (discount) {
@@ -24,7 +27,33 @@ const Product = ({ id, images, thumbnails, name, brand, price, discount, descrip
     setModalIsOpen(false);
   };
 
-  const cartItem = items.find(item => item.id === id) || {};
+  const handleUpdateCartItemQuantity = (id, action) => {
+    if (action === "subtract") {
+      setCartItemQuantity(prevItemQuantity => {
+        if (prevItemQuantity > 0) {
+          prevItemQuantity--;
+        }
+        return prevItemQuantity;
+      });
+      updateItemQuantity(id, -1);
+    };
+    if (action === "add") {
+      setCartItemQuantity(prevItemQuantity => prevItemQuantity + 1);
+      updateItemQuantity(id, 1);
+    };
+  }
+
+  const handleAddItemToCart = (id, quantity) => {
+    let updatedQuantity = quantity;
+
+    if(updatedQuantity === 0) {
+      setCartItemQuantity(1);
+      updatedQuantity = 1;
+    }
+
+    addItemToCart(id, updatedQuantity);
+  }
+
 
   return (
     <article className="product">
@@ -51,16 +80,16 @@ const Product = ({ id, images, thumbnails, name, brand, price, discount, descrip
         </div>
         <div className="product-actions">
           <div className="cart-item-actions">
-            <button onClick={() => updateItemQuantity(id, -1)}>
+            <button onClick={() => handleUpdateCartItemQuantity(id, "subtract")}>
               <img src={minusIcon} alt="" />
             </button>
-            <span>{cartItem.quantity ? cartItem.quantity : "0"}</span>
-            <button onClick={() => updateItemQuantity(id, 1)}>
+            <span>{cartItemQuantity}</span>
+            <button onClick={() => handleUpdateCartItemQuantity(id, "add")}>
               <img src={plusIcon} alt="" />
             </button>
           </div>
 
-          <button onClick={() => addItemToCart(id)} className="add-to-cart">
+          <button onClick={() => handleAddItemToCart(id, cartItemQuantity)} className="add-to-cart">
             <img src={cartIcon} alt="" />
             <span>Add to Cart</span>
           </button>
