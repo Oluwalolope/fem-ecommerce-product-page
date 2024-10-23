@@ -149,6 +149,11 @@ menu {
     z-index: 3;
     transition: 200ms ease-in-out;
   }
+  .primary-navigation ul a:is(:hover, :focus) {
+    color: var(--clr-neutral-900);
+    padding-bottom: 0;
+    border-bottom: none;
+  }
 
   header:has(nav.opened)::after,
   body:has(nav.opened) main::after {
